@@ -1,0 +1,2 @@
+# List your project dependencies here
+# requests==2.28.2
