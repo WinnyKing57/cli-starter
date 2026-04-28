@@ -1,19 +1,25 @@
 {
   "name": "cli-starter",
   "version": "1.0.0",
-  "description": "",
+  "description": "A robust CLI tool to generate project boilerplates for HTML, PHP, Node.js, Express, React, and Python.",
   "main": "index.js",
   "bin": {
     "cli-starter": "bin/cli.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/WinnyKing57/cli-starter.git"
   },
-  "keywords": [],
+  "keywords": [
+    "cli",
+    "starter",
+    "boilerplate",
+    "generator",
+    "template"
+  ],
   "author": "",
   "license": "MIT",
   "bugs": {
@@ -21,6 +27,10 @@
   },
   "homepage": "https://github.com/WinnyKing57/cli-starter#readme",
   "dependencies": {
-    "commander": "^14.0.3"
+    "commander": "^14.0.3",
+    "inquirer": "^8.0.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
   }
 }
