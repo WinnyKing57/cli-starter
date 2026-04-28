@@ -7,6 +7,7 @@ const path = require("path");
  * @returns {boolean}
  */
 function isBinary(buffer) {
+  // Check the first 1024 bytes for a null byte
   const checkLimit = Math.min(buffer.length, 1024);
   for (let i = 0; i < checkLimit; i++) {
     if (buffer[i] === 0) return true;
@@ -18,9 +19,9 @@ function isBinary(buffer) {
  * Copies a directory recursively and replaces variables in file contents.
  * @param {string} src Source directory path
  * @param {string} dest Destination directory path
- * @param {Object} variables Object containing variables to replace
+ * @param {string} projectName Name of the project to replace variables
  */
-function copyDir(src, dest, variables) {
+function copyDir(src, dest, projectName) {
   fs.mkdirSync(dest, { recursive: true });
 
   const entries = fs.readdirSync(src);
@@ -32,7 +33,7 @@ function copyDir(src, dest, variables) {
     const stat = fs.statSync(srcPath);
 
     if (stat.isDirectory()) {
-      copyDir(srcPath, destPath, variables);
+      copyDir(srcPath, destPath, projectName);
     } else {
       const buffer = fs.readFileSync(srcPath);
 
@@ -40,12 +41,8 @@ function copyDir(src, dest, variables) {
         fs.writeFileSync(destPath, buffer);
       } else {
         let content = buffer.toString("utf8");
-
-        // Replace all variables in the format {{variable_name}}
-        for (const [key, value] of Object.entries(variables)) {
-          content = content.split(`{{${key}}}`).join(value);
-        }
-
+        // Safe replacement without regex to avoid issues with $ in projectName
+        content = content.split("{{project_name}}").join(projectName);
         fs.writeFileSync(destPath, content);
       }
     }
