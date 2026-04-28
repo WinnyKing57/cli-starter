@@ -1,0 +1,26 @@
+{
+  "name": "cli-starter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "cli-starter": "bin/cli.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WinnyKing57/cli-starter.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/WinnyKing57/cli-starter/issues"
+  },
+  "homepage": "https://github.com/WinnyKing57/cli-starter#readme",
+  "dependencies": {
+    "commander": "^14.0.3"
+  }
+}
