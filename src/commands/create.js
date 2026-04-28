@@ -3,9 +3,8 @@ const path = require("path");
 const templateEngine = require("../core/templateEngine");
 const logger = require("../utils/logger");
 
-module.exports = (type, name) => {
-  const templatePath = path.join(__dirname, "../../templates", type);
-  const targetPath = path.join(process.cwd(), name);
+  const templatePath = path.join(templatesPath, projectType);
+  const targetPath = path.join(process.cwd(), projectName);
 
   if (!fs.existsSync(templatePath)) {
     logger.error(`Template introuvable : ${type}`);
