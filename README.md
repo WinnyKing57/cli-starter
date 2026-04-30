@@ -54,21 +54,7 @@ You can specify the template type and project name directly:
 cli-starter create <type> <name>
 ```
 
-### External Templates
-
-Use any Git repository as a template:
-
-```bash
-cli-starter create my-project --template https://github.com/user/my-template.git
-```
-
-Or a local directory:
-
-```bash
-cli-starter create my-project --template ./my-local-template
-```
-
-**Available Built-in Types:**
+**Available Types:**
 
 - `html`: Simple static website (HTML/CSS/JS)
 - `php`: PHP project with `public/` directory and `composer.json`

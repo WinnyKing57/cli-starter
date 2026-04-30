@@ -168,7 +168,7 @@ export default async function (type, name, options = {}) {
 
     copyDir(templatePath, targetPath, variables);
 
-    // Git initialization
+    // Post-copy actions
     const { initGit } = await inquirer.prompt([
       {
         type: "confirm",
@@ -184,47 +184,6 @@ export default async function (type, name, options = {}) {
         logger.success("Dépôt Git initialisé.");
       } else {
         logger.error("Git n'est pas installé, impossible d'initialiser le dépôt.");
-      }
-    }
-
-    // Dependency installation
-    const hasPackageJson = fs.existsSync(path.join(targetPath, "package.json"));
-    const hasComposerJson = fs.existsSync(path.join(targetPath, "composer.json"));
-    const hasRequirementsTxt = fs.existsSync(path.join(targetPath, "requirements.txt"));
-
-    if (hasPackageJson || hasComposerJson || hasRequirementsTxt) {
-      const { installDeps } = await inquirer.prompt([
-        {
-          type: "confirm",
-          name: "installDeps",
-          message: "Voulez-vous installer les dépendances ?",
-          default: true,
-        },
-      ]);
-
-      if (installDeps) {
-        if (hasPackageJson && isCommandAvailable("npm")) {
-          logger.success("Installation des dépendances npm...");
-          execFileSync("npm", ["install"], { cwd: targetPath, stdio: "inherit" });
-        }
-        if (hasComposerJson && isCommandAvailable("composer")) {
-          logger.success("Installation des dépendances Composer...");
-          execFileSync("composer", ["install"], { cwd: targetPath, stdio: "inherit" });
-        }
-        if (hasRequirementsTxt) {
-          const pythonCmd = isCommandAvailable("python3") ? "python3" : "python";
-          if (pythonCmd) {
-            logger.success(
-              "Création de l'environnement virtuel et installation des dépendances..."
-            );
-            execFileSync(pythonCmd, ["-m", "venv", "venv"], { cwd: targetPath, stdio: "ignore" });
-            const pipPath = path.join(targetPath, "venv", "bin", "pip");
-            execFileSync(pipPath, ["install", "-r", "requirements.txt"], {
-              cwd: targetPath,
-              stdio: "inherit",
-            });
-          }
-        }
       }
     }
 
