@@ -6,12 +6,14 @@ A robust and extensible CLI tool to instantly scaffold project boilerplates. Sto
 
 ## 🚀 Features
 
-- **Multiple Templates**: Support for HTML, PHP, Node.js, Express, React (Vite), Tailwind CSS, and Python.
+- **Multiple Templates**: Support for HTML, PHP, Node.js, Express, React (Vite), Tailwind CSS, Python, Next.js, Vue.js, Docker, and Fullstack.
 - **Interactive Mode**: Easy-to-use prompts to configure your project.
 - **Automatic Initialization**: Optional `git init` and dependency installation (`npm install`, `composer install`, `venv`).
+- **External Templates**: Support for remote Git repositories or local directories as templates.
+- **User Configuration**: Persists your preferences (e.g., author) in `~/.cli-starter.json`.
 - **Dynamic Variable Replacement**: Automatically injects project name, author, description, and version into your files.
 - **Safe Copying**: Heuristic detection of binary files to prevent corruption.
-- **Extensible**: Easily add your own templates.
+- **Modern Stack**: Migrated to ESM and uses the latest `inquirer` and `commander`.
 
 ---
 
@@ -46,20 +48,53 @@ cli-starter create
 
 ### Command Line Arguments
 
-You can also specify the template type and project name directly:
+You can specify the template type and project name directly:
 
 ```bash
 cli-starter create <type> <name>
 ```
 
-**Available Types:**
+### External Templates
+
+Use any Git repository as a template:
+
+```bash
+cli-starter create my-project --template https://github.com/user/my-template.git
+```
+
+Or a local directory:
+
+```bash
+cli-starter create my-project --template ./my-local-template
+```
+
+**Available Built-in Types:**
+
 - `html`: Simple static website (HTML/CSS/JS)
 - `php`: PHP project with `public/` directory and `composer.json`
 - `node`: Basic Node.js setup
-- `express`: Express.js API with cors and dotenv
+- `express`: Express.js API with `cors` and `dotenv`
 - `react`: React project using Vite
-- `tailwind`: HTML project with Tailwind CSS via CDN
-- `python`: Python script with `requirements.txt` and venv setup
+- `tailwind`: HTML project with Tailwind CSS
+- `python`: Python script with `requirements.txt` and `venv` setup
+- `nextjs`: Next.js project
+- `vue`: Vue.js project
+- `docker`: Basic Docker setup with `docker-compose.yml`
+- `fullstack`: Integrated Express + React project
+
+---
+
+## 🗃️ Configuration
+
+The CLI stores your preferences in `~/.cli-starter.json`. This file is automatically created and updated when you use the interactive mode.
+
+Example content:
+
+```json
+{
+  "author": "Your Name"
+}
+```
 
 ---
 
@@ -71,7 +106,7 @@ cli-starter/
 ├── src/
 │   ├── commands/  # CLI command logic
 │   ├── core/      # Template engine
-│   └── utils/     # Helpers and logger
+│   └── utils/     # Helpers, config, and logger
 ├── templates/     # Project templates
 └── tests/         # Unit tests
 ```
@@ -80,20 +115,28 @@ cli-starter/
 
 ## 🧠 How it works
 
-The CLI clones the selected template directory to your specified path. During the process, it identifies text files and replaces placeholders like `{{project_name}}`, `{{author}}`, `{{description}}`, and `{{version}}` with the information you provide. Binary files (images, etc.) are detected and copied without modification to ensure they are not corrupted.
+The CLI clones or copies the selected template directory to your specified path. During the process, it identifies text files and replaces placeholders like `{{project_name}}`, `{{author}}`, `{{description}}`, and `{{version}}` with the information you provide. Binary files (images, etc.) are detected and copied without modification to ensure they are not corrupted.
 
 ---
 
 ## 🛠️ Development & Testing
 
 To run the CLI from source during development:
+
 ```bash
 node bin/cli.js create
 ```
 
 To run the test suite:
+
 ```bash
 npm test
+```
+
+To run linting:
+
+```bash
+npm run lint
 ```
 
 ---
@@ -106,7 +149,7 @@ We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for deta
 
 ## 📌 Requirements
 
-- Node.js >= 16
+- Node.js >= 18
 - npm
 - (Optional) Git, Composer, Python3
 

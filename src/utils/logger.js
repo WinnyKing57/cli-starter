@@ -2,7 +2,7 @@
  * Logs a success message to the console.
  * @param {string} message The message to log
  */
-function success(message) {
+export function success(message) {
   console.log(`✅ ${message}`);
 }
 
@@ -10,11 +10,11 @@ function success(message) {
  * Logs an error message to the console.
  * @param {string} message The message to log
  */
-function error(message) {
+export function error(message) {
   console.error(`❌ ${message}`);
 }
 
-module.exports = {
+export default {
   success,
   error,
 };

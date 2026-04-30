@@ -4,7 +4,7 @@
 </template>
 
 <script setup>
-const projectName = '{{project_name}}'
+const projectName = "{{project_name}}";
 </script>
 
 <style>

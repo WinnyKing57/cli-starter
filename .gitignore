@@ -13,4 +13,7 @@ node_modules/
 
 # IDE files
 .vscode/
+coverage/
+
+# IDE files
 .idea/
