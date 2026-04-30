@@ -53,6 +53,7 @@ cli-starter create <type> <name>
 ```
 
 **Available Types:**
+
 - `html`: Simple static website (HTML/CSS/JS)
 - `php`: PHP project with `public/` directory and `composer.json`
 - `node`: Basic Node.js setup
@@ -87,11 +88,13 @@ The CLI clones the selected template directory to your specified path. During th
 ## 🛠️ Development & Testing
 
 To run the CLI from source during development:
+
 ```bash
 node bin/cli.js create
 ```
 
 To run the test suite:
+
 ```bash
 npm test
 ```
