@@ -1,1 +1,1 @@
-console.log('{{project_name}} loaded');
+console.log("{{project_name}} loaded");

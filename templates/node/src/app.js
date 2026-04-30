@@ -1,5 +1,5 @@
 module.exports = (req, res) => {
   res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello from {{project_name}}!\n');
+  res.setHeader("Content-Type", "text/plain");
+  res.end("Hello from {{project_name}}!\n");
 };
